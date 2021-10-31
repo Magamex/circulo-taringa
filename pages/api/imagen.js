@@ -1,13 +1,7 @@
-const axios = require('axios');
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const {createCanvas, loadImage} = require("canvas");
-const Canvas = require("canvas");
-global.Image = Canvas.Image;
-const fs = require("fs");
-
-const traerObj = async(usuario)=>{
-    const res = await axios(`/api/usuario?user=${usuario}`)
-    return res.data
-}
+// const Canvas = require("canvas");
+// global.Image = Canvas.Image;
 
 const toRad = (x) => x * (Math.PI / 180);
 
