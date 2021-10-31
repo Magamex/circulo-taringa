@@ -84,6 +84,7 @@ async function render(config) {
 	// const out = fs.createWriteStream("./circle.png");
 	// const stream = canvas.createPNGStream();
 	const stream = canvas.toDataURL('image/jpeg');
+	// const stream = canvas.toBuffer()
 
   return stream;
 	// stream.pipe(out);
@@ -106,5 +107,10 @@ export default async function handler(req, res) {
 		{distance: 450, count: layers[2], radius: 50, users: cosas[1].data[2]},
 	])
 
+	// res.writeHead(200, {
+	// 	"Content-Type": "image/png",
+	// 	"Content-Length": image.length,
+  	// });
+	// res.end(image)
   res.status(200).json({ img: image})
 }
