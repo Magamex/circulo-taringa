@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import Link from 'next/link'
 
 const axios = require('axios');
 
@@ -10,6 +11,7 @@ export default function Home({initialId,onSave}) {
   // const router = useRouter()
   const [newId, setNewId] = useState(initialId)
   const [showMe, setShowMe] = useState(false)
+  const [hideButton, setHideButton] = useState(false)
   const [imgRes, setImgRes] = useState('')
   const [msgStatus, setmsgStatus] = useState('Al ingresar el usuario se generar una imagen con todos los usuarios que te rodean')
 
@@ -18,8 +20,9 @@ export default function Home({initialId,onSave}) {
 
     if (path === "/api/imagen") {
       setmsgStatus('Generando imagen...')
+      setHideButton(true)
       try {
-        const post_res = await axios.get(`http://localhost:3000/api/imagen?user=${newId}`);
+        const post_res = await axios.get(`/api/imagen?user=${newId}`);
         setShowMe(!showMe);
         setImgRes(post_res.data.img)
       }catch(err){
@@ -46,7 +49,7 @@ export default function Home({initialId,onSave}) {
           </h1>
 
           <p className={styles.description}>
-            Ingrese el usuario en el campo
+            Mira los usuarios que te rodean!!!
           </p>
 
           <div id="cuerpo">
@@ -54,7 +57,7 @@ export default function Home({initialId,onSave}) {
               <input className={styles.code} type="text" onChange={(e) => setNewId(e.target.value)}  placeholder="Ingresar Usuario"/>
             </div>
             <br/>
-            <div className={styles.description}>
+            <div className={styles.description} style={{display: hideButton?"none":"block"}}>
               <button className={styles.btn} onClick={(e) => handleClick(e, "/api/imagen")}>Generar</button>
             </div>
           </div>
@@ -64,12 +67,20 @@ export default function Home({initialId,onSave}) {
         </div>
       
         <div className={styles.description} style={{display: showMe?"block":"none"}}>
-          <img className={styles.size} src={imgRes}/>
+          <br/>
+          <div className={styles.title}>{newId}</div>
+          <hr/>
+          <div className={styles.description}>
+            <img className={styles.size} src={imgRes}/>
+          </div>
           <a className={styles.btn} href="http://localhost:3000">Volver</a>
         </div>
       </main>
 
       <footer className={styles.footer}>
+        <a href="https://www.taringa.net/22matutex22" target="_blank" rel="noopener noreferrer">
+          Created by 22matutex22
+        </a>
         <a
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"

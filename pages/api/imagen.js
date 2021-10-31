@@ -6,7 +6,7 @@ global.Image = Canvas.Image;
 const fs = require("fs");
 
 const traerObj = async(usuario)=>{
-    const res = await axios(`http://localhost:3000/api/usuario?user=${usuario}`)
+    const res = await axios(`https://circulo-taringa.vercel.app/api/usuario?user=${usuario}`)
     return res.data
 }
 
