@@ -3,9 +3,10 @@ const {createCanvas, loadImage} = require("canvas");
 const Canvas = require("canvas");
 global.Image = Canvas.Image;
 const fs = require("fs");
+import Link from 'next/link'
 
 const traerObj = async(usuario)=>{
-    const res = await axios(`https://circulo-taringa.vercel.app/api/usuario?user=${usuario}`)
+    const res = await axios(`/api/usuario?user=${usuario}`)
     return res.data
 }
 
