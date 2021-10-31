@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-const {createCanvas, loadImage} = require("canvas");
+const {createCanvas, loadImage} = require("node-canvas");
 // const Canvas = require("canvas");
 // global.Image = Canvas.Image;
 
