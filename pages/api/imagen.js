@@ -83,7 +83,7 @@ async function render(config) {
 	// write the resulting canvas to file
 	// const out = fs.createWriteStream("./circle.png");
 	// const stream = canvas.createPNGStream();
-	const stream = canvas.toDataURL();
+	const stream = canvas.toDataURL('image/jpeg');
 
   return stream;
 	// stream.pipe(out);
