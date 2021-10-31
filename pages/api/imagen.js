@@ -4,9 +4,8 @@ const Canvas = require("canvas");
 global.Image = Canvas.Image;
 const fs = require("fs");
 
-const traerObj = async(baseUrl,usuario)=>{
-	
-    const res = await axios(`${baseUrl}/api/usuario?user=${usuario}`)
+const traerObj = async(usuario)=>{
+    const res = await axios(`/api/usuario?user=${usuario}`)
     return res.data
 }
 
@@ -101,13 +100,8 @@ async function render(config) {
 }
 
 export default async function handler(req, res) {
-  if(req.query.user == undefined){
-    return res.status(404).send('No se encontro el parametro user');
-  }
 
-  const protocol = req.headers['x-forwarded-proto'] || 'http'
-  const baseUrl = req ? `${protocol}://${req.headers.host}` : ''
-  const cosas = await traerObj(baseUrl,req.query.user)
+  const cosas = req.body 
 
   const layers = [8, 15, 26];
 
@@ -117,6 +111,6 @@ export default async function handler(req, res) {
 		{distance: 330, count: layers[1], radius: 58, users: cosas[1].data[1]},
 		{distance: 450, count: layers[2], radius: 50, users: cosas[1].data[2]},
 	])
-  // return image
+
   res.status(200).json({ img: image})
 }

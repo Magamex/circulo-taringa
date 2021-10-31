@@ -22,7 +22,9 @@ export default function Home({initialId,onSave}) {
       setmsgStatus('Generando imagen...')
       setHideButton(true)
       try {
-        const post_res = await axios.get(`/api/imagen?user=${newId}`);
+        const user_res = await axios(`/api/usuario?user=${newId}`)
+
+        const post_res = await axios.post(`/api/imagen`,user_res.data);
         setShowMe(!showMe);
         setImgRes(post_res.data.img)
       }catch(err){
