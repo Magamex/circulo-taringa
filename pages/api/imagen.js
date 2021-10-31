@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const axios = require('axios');
 const {createCanvas, loadImage} = require("canvas");
 const Canvas = require("canvas");
@@ -93,11 +92,11 @@ async function render(config) {
 	const stream = canvas.toDataURL();
 
   return stream;
-	stream.pipe(out);
-	out.on("finish", () => {
-    console.log("Done!")
+	// stream.pipe(out);
+	// out.on("finish", () => {
+    // console.log("Done!")
     // this.image64 = fs.readFileSync("./circle.png", {encoding: 'base64'});
-  });
+//   });
 }
 
 export default async function handler(req, res) {
