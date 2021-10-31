@@ -1,9 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { useRouter } from 'next/router'
 import { useState } from 'react'
-import Link from 'next/link'
 
 const axios = require('axios');
 
@@ -22,9 +20,10 @@ export default function Home({initialId,onSave}) {
       setmsgStatus('Generando imagen...')
       setHideButton(true)
       try {
-        const user_res = await axios(`/api/usuario?user=${newId}`)
-
+        const user_res = await axios.get(`/api/usuario?user=${newId}`);
+        console.log(user_res.data);
         const post_res = await axios.post(`/api/imagen`,user_res.data);
+        console.log(post_res.data);
         setShowMe(!showMe);
         setImgRes(post_res.data.img)
       }catch(err){
