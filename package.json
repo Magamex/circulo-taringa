@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.24.0",
     "bulma": "^0.9.3",
     "canvas": "^2.8.0",
     "next": "11.1.2",

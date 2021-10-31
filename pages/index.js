@@ -2,20 +2,32 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 
-export default function Home() {
-  const router = useRouter()
-  const handleClick = (e, path) => {
+const axios = require('axios');
+
+export default function Home({initialId,onSave}) {
+  // const router = useRouter()
+  const [newId, setNewId] = useState(initialId)
+  const [showMe, setShowMe] = useState(false)
+  const [imgRes, setImgRes] = useState('')
+
+  const handleClick = async(e, path) => {
    e.preventDefault()
 
-    if (path === "/api/hello") {
-      // console.log("I clicked on the About Page");
-      // then you can: 
-      // router.push(path)
+    if (path === "/api/imagen") {
+      try {
+        const post_res = await axios.get(`http://localhost:3000/api/imagen?user=${newId}`);
+        setShowMe(!showMe);
+        setImgRes(post_res.data.img)
+      }catch(err){
+        return 404
+      }
     }
   };
 
   return (
+    
     <div className={styles.container}>
       <Head>
         <title>Circulo Taringuero</title>
@@ -24,25 +36,33 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Circulo <a href="https://taringa.net">Taringuero</a> 
-        </h1>
+        <div style={{display: showMe?"none":"block"}}>
 
-        <p className={styles.description}>
-          Ingrese el usuario en el campo
-        </p>
+          <h1 className={styles.title}>
+            Circulo <a href="https://taringa.net">Taringuero</a> 
+          </h1>
 
-        <div id="cuerpo">
-          <div className={styles.description}>
-            <input className={styles.code} type="text" placeholder="Ingresar Usuario"/>
+          <p className={styles.description}>
+            Ingrese el usuario en el campo
+          </p>
+
+          <div id="cuerpo">
+            <div className={styles.description}>
+              <input className={styles.code} type="text" onChange={(e) => setNewId(e.target.value)}  placeholder="Ingresar Usuario"/>
+            </div>
+            <br/>
+            <div className={styles.description}>
+              <button className={styles.btn} onClick={(e) => handleClick(e, "/api/imagen")}>Generar</button>
+            </div>
           </div>
-          <br/>
-          <div className={styles.description}>
-            <button className={styles.btn} onClick={(e) => handleClick(e, "/api/hello")}>Generar</button>
-          </div>
+
+          <div className={styles.card}>Al ingresar el usuario se generar una imagen con todos los usuarios que te rodean</div>
+
         </div>
-
-        <div className={styles.card}>Al ingresar el usuario se generar una imagen con todos los usuarios que te rodean</div>
+      
+        <div className={styles.description} style={{display: showMe?"block":"none"}}>
+          <img className={styles.size} src={imgRes}/>
+        </div>
       </main>
 
       <footer className={styles.footer}>
