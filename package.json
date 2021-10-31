@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "now-build": "yum install libuuid-devel libmount-devel zlib-devel && cp /lib64/{libuuid,libmount,libblkid,libz}.so.1 node_modules/canvas/build/Release/ && yarn build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "axios": "^0.24.0",
     "bulma": "^0.9.3",
-    "canvas": "2.6.1",
+    "canvas": "^2.8.0",
     "next": "11.1.2",
     "node-canvas": "^2.7.0",
     "node-sass": "^6.0.1",
