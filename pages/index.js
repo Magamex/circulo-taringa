@@ -11,16 +11,19 @@ export default function Home({initialId,onSave}) {
   const [newId, setNewId] = useState(initialId)
   const [showMe, setShowMe] = useState(false)
   const [imgRes, setImgRes] = useState('')
+  const [msgStatus, setmsgStatus] = useState('Al ingresar el usuario se generar una imagen con todos los usuarios que te rodean')
 
   const handleClick = async(e, path) => {
    e.preventDefault()
 
     if (path === "/api/imagen") {
+      setmsgStatus('Generando imagen...')
       try {
         const post_res = await axios.get(`http://localhost:3000/api/imagen?user=${newId}`);
         setShowMe(!showMe);
         setImgRes(post_res.data.img)
       }catch(err){
+        setmsgStatus(err)
         return 404
       }
     }
@@ -56,12 +59,13 @@ export default function Home({initialId,onSave}) {
             </div>
           </div>
 
-          <div className={styles.card}>Al ingresar el usuario se generar una imagen con todos los usuarios que te rodean</div>
+          <div className={styles.card}>{msgStatus}</div>
 
         </div>
       
         <div className={styles.description} style={{display: showMe?"block":"none"}}>
           <img className={styles.size} src={imgRes}/>
+          <a className={styles.btn} href="http://localhost:3000">Volver</a>
         </div>
       </main>
 

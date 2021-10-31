@@ -65,6 +65,7 @@
 
 .code {
   background:#F4F5F5;
+  color:#000000;
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
@@ -74,6 +75,7 @@
 
 .btn {
   background:#F4F5F5;
+  color:#000000;
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
