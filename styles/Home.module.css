@@ -137,6 +137,22 @@
   width: 50%;
 }
 
+/* Estilos de la tabla */
+.column {
+  flex:1
+}
+
+.row {
+  display: flex;
+  text-align: center;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.img {
+  width:30%
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;

@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import React, { useState} from 'react';
 import Router from 'next/router';
+import Parser from 'html-react-parser';
 
 const axios = require('axios');
 
@@ -11,25 +12,25 @@ export default function Home({initialId,onSave}) {
   const [newId, setNewId] = useState(initialId)
   const [showMe, setShowMe] = useState(false)
   const [hideButton, setHideButton] = useState(false)
-  const [imgRes, setImgRes] = useState('')
+  const [respTable, setRespTable] = useState('')
   const [msgStatus, setmsgStatus] = useState('Al ingresar el usuario se generar una imagen con todos los usuarios que te rodean')
 
   const handleClick = async(e, path) => {
    e.preventDefault()
 
     if (path === "/api/imagen") {
-      setmsgStatus('Generando imagen...')
+      setmsgStatus('Investigando...')
       setHideButton(true)
       try {
         const user_res = await axios.get(`/api/usuario?user=${newId}`);
         console.log(user_res.data);
-        const post_res = await axios.post(`/api/imagen`,user_res.data);
+        const post_res = await axios.post(`/api/test`,user_res.data);
         console.log(post_res.data);
         setShowMe(!showMe);
-        setImgRes(post_res.data.img)
+        setRespTable(`${post_res.data.code}`)
       }catch(err){
-        setmsgStatus(err)
-        return 404
+        setmsgStatus('No se encontro el usuario')
+        setHideButton(false)
       }
     }
   };
@@ -69,12 +70,9 @@ export default function Home({initialId,onSave}) {
         </div>
       
         <div className={styles.description} style={{display: showMe?"block":"none"}}>
+          <div className={styles.card} dangerouslySetInnerHTML={{ __html: respTable}}></div>
+          {/* <div className={styles.card}>{Parser(respTable, { trim: true })}</div> */}
           <br/>
-          <div className={styles.title}>{newId}</div>
-          <hr/>
-          <div className={styles.description}>
-            <img className={styles.size} src={imgRes}/>
-          </div>
           <a className={styles.btn} href="http://localhost:3000">Volver</a>
         </div>
       </main>
