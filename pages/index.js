@@ -3,7 +3,6 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import React, { useState} from 'react';
 import Router from 'next/router';
-import Parser from 'html-react-parser';
 
 const axios = require('axios');
 
@@ -16,7 +15,7 @@ export default function Home({initialId,onSave}) {
   const [msgStatus, setmsgStatus] = useState('Al ingresar el usuario se generar una imagen con todos los usuarios que te rodean')
 
   const handleClick = async(e, path) => {
-   e.preventDefault()
+    e.preventDefault()
 
     if (path === "/api/imagen") {
       setmsgStatus('Investigando...')
@@ -29,7 +28,7 @@ export default function Home({initialId,onSave}) {
         setShowMe(!showMe);
         setRespTable(`${post_res.data.code}`)
       }catch(err){
-        setmsgStatus('No se encontro el usuario')
+        setmsgStatus('No se encontro el usuario o No genera contenido')
         setHideButton(false)
       }
     }
@@ -71,9 +70,8 @@ export default function Home({initialId,onSave}) {
       
         <div className={styles.description} style={{display: showMe?"block":"none"}}>
           <div className={styles.card} dangerouslySetInnerHTML={{ __html: respTable}}></div>
-          {/* <div className={styles.card}>{Parser(respTable, { trim: true })}</div> */}
           <br/>
-          <a className={styles.btn} href="https://circulo-taringa.vercel.app/">Volver</a>
+          <a className={styles.btn} href="/">Volver</a>
         </div>
       </main>
 

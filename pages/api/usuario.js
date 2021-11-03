@@ -15,8 +15,8 @@ const get_info_usuario = async(usuario)=>{
   try{
     const url = `https://api-user.taringa.net/user/${usuario}/about`
     const res = await axios.get(url)
-    const {id,username,avatar} = res.data
-    return {id,username,avatar}
+    const {id,username,avatar,suspended} = res.data
+    return {id,username,avatar,suspended}
   }catch(err){
     return 404
   }
@@ -63,8 +63,9 @@ Promise.all(id_posts.map(async id => {
       var name = c.username
       var avatar = c.avatar
       var id = c.id
+      var suspended = c.suspended
       if(!p.hasOwnProperty(name)){
-        var cont = {id:id, username: name, avatar:avatar, total: 0}
+        var cont = {id:id, username: name, avatar:avatar, total: 0, suspended: suspended}
       }
       cont.total++
       result.push(cont)
@@ -75,7 +76,7 @@ Promise.all(id_posts.map(async id => {
   const test = []
   result.forEach(function (a) {
     if (!this[a.username]) {
-        this[a.username] = {id:a.id, username: a.username, avatar:a.avatar, total: 0 };
+        this[a.username] = {id:a.id, username: a.username, avatar:a.avatar, total: 0 , suspended:a.suspended};
         test.push(this[a.username]);
     }
     this[a.username].total += a.total;

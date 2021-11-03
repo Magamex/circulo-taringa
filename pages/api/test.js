@@ -28,6 +28,7 @@ async function render(config) {
 
             if(distance==0){
                 table+=`<div style="text-align: center">
+                            <span style="font-size:small;color:red">${(users[i].suspended)?'SUSPENDIDO':''}</span>
                             <h2>${users[i].username}</h2>
                             <img style="width:10%" src="${tempUrl}" />
                         </div>
