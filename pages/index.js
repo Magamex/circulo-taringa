@@ -71,7 +71,7 @@ export default function Home({initialId,onSave}) {
         <div className={styles.description} style={{display: showMe?"block":"none"}}>
           <div className={styles.card} dangerouslySetInnerHTML={{ __html: respTable}}></div>
           <br/>
-          <a className={styles.btn} href="/">Volver</a>
+          <a className={styles.btn} href="https://circulo-taringa.vercel.app/">Volver</a>
         </div>
       </main>
 
