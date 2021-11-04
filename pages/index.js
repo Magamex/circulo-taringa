@@ -12,7 +12,7 @@ export default function Home({initialId,onSave}) {
   const [showMe, setShowMe] = useState(false)
   const [hideButton, setHideButton] = useState(false)
   const [respTable, setRespTable] = useState('')
-  const [msgStatus, setmsgStatus] = useState('Al ingresar el usuario se generar una imagen con todos los usuarios que te rodean')
+  const [msgStatus, setmsgStatus] = useState('Al ingresar el usuario se genera una tabla por nivel con todos los usuarios que te rodean')
 
   const handleClick = async(e, path) => {
     e.preventDefault()
