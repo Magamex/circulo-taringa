@@ -40,8 +40,9 @@ export default function Home({initialId,onSave}) {
       <Head>
         <title>Circulo Taringuero</title>
         <meta name="description" content="Mini Proyecto similar a chirpty utilizando la tecnología NextJS y la API de Taringa.
-Al ingresar un usuario visualizas en diferentes niveles los usuarios que te rodean, de mayor actividad a menor actividad."></meta>
-        <meta name="author" content="Matias Angeluk"></meta>
+Al ingresar un usuario visualizas en diferentes niveles los usuarios que te rodean, de mayor actividad a menor actividad."/>
+        <meta name="author" content="Matias Angeluk"/>
+        <meta prefix="og: http://ogp.me/ns#" property="og:image" content="/circulotaringuero.png" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
